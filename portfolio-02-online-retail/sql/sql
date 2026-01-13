@@ -29,3 +29,46 @@ customers  revenue_per_customer    rn      revenue_percentage
 17850   	1124                	3		8.13303444672935
 13408   	1024.6800000000003   	4		7.4143752107425565
 12583   	855.86              	5		6.192828168663508
+
+
+## Order frequency for the top 20% segment of customer.
+
+## Query
+
+WITH raw_data AS ( SELECT customerID as customers,
+						  quantity*unitPrice as amount 
+				   FROM online_retail ), 
+customer_data AS ( SELECT customers,
+						  SUM(amount) as revenue_per_customer 
+				   FROM raw_data 
+                   GROUP BY customers), 
+customer_revenue AS ( SELECT customers,
+							 revenue_per_customer, 
+                             ROW_NUMBER() OVER(ORDER BY revenue_per_customer DESC) AS rn,
+                             COUNT(*) OVER() AS total_customers, 
+                             SUM(revenue_per_customer) OVER() AS total_revenue 
+					 FROM customer_data),
+top_20_customers AS (SELECT customers, 
+							revenue_per_customer, 
+							rn,
+							(revenue_per_customer*100)/total_revenue AS revenue_percentage
+                     FROM customer_revenue
+                     WHERE rn <= total_customers*0.2)
+SELECT COUNT(DISTINCT o.InvoiceNo) as orders_per_customer,
+			 o.customerID as customer,
+             tc.customers,
+             tc.rn,
+             tc.revenue_percentage
+FROM online_retail o
+INNER JOIN top_20_customers tc ON o.customerID = tc.customers
+GROUP BY o.customerID;
+
+
+## Result
+
+orders_per_customer	 customer         customers        rn          revenue_percentage
+1						12583			12583			5			6.192828168663508
+1						13408			13408			4			7.4143752107425565
+2						16029			16029			1			26.78778424014739
+1						17511			17511			2			13.21068177114915
+8						17850			17850			3			8.13303444672935
