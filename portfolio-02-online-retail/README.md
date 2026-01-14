@@ -26,3 +26,6 @@ Online retail dataset(Kaggle) containing Invoice No, Stock code, Description, Qu
 ## Business Implications
 - The business is exposed to churn risk if top customers are lost.
 - Retention strategies for high-value customers are critical.
+
+## Insights
+   This analysis revealed why transaction characterstics are important to study. High revenue in this dataset is because of infrequent high value transaction          rather than frequent purchasing behaviour.
