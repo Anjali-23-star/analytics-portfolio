@@ -1,8 +1,8 @@
-## Monthly purchase frequency.
+/* ===============================================================================================================
+Monthly purchase frequency.
 ##NOTE: This dataset has entries only for the month of december, so frequency comparisons are within the same month.
-  
-## Query
-  
+==================================================================================================================*/  
+
 WITH purchase_count AS (
 	SELECT customerID AS customer,
                  DATE_FORMAT(InvoiceDate, '%Y-%m') AS purchase_month,
@@ -14,26 +14,24 @@ SELECT *
 FROM purchase_count
 ORDER BY purchases_per_month DESC;
 
-
-## Result Set:
-
+/*========================================================
+  Result
+==========================================================*/
 customer    purchase_month       purchases_per_month
 17850  	      2010-12  	            65
-15311    	    2010-12              	36
-17511	        2010-12	              24
-12583	        2010-12              	20
-14688	        2010-12              	19
-13448	        2010-12              	18
-13047        	2010-12              	17
-16250        	2010-12              	14
-16029        	2010-12              	8
+15311    	    2010-12             36
+17511	        2010-12	            24
+12583	        2010-12             20
+14688	        2010-12             19
+13448	        2010-12             18
+13047        	2010-12             17
+16250        	2010-12             14
+16029        	2010-12              8
 
-##ANALYSIS:
+/*=====================================================================================================================
 The customer generating the highest revenue (16029) has purchased only few times ~8.
 We analyse the order value for the high transactional value customer(16029) and high purchase frequency customer(17850).
-
-
-## Query
+=========================================================================================================================*/
 WITH customer_orders AS (
 	SELECT customerID as customer,
          InvoiceNo as orders,
@@ -47,9 +45,9 @@ SELECT  customer,
 FROM customer_orders
 GROUP BY customer;
 
-
-## Result Set:
-
+/*==================================================
+ RESULT SET
+==================================================*/
 customer      average_order_value      
 17850         140.5
 16029        	1851.06
