@@ -28,25 +28,27 @@ customer    purchase_month       purchases_per_month
 16250        	2010-12             14
 16029        	2010-12              8
 
+	
 /*=====================================================================================================================
 The customer generating the highest revenue (16029) has purchased only few times ~8.
 We analyse the order value for the high transactional value customer(16029) and high purchase frequency customer(17850).
 =========================================================================================================================*/
+	
 WITH customer_orders AS (
 	SELECT customerID as customer,
          InvoiceNo as orders,
 				 SUM(Quantity*UnitPrice) as revenue
 	FROM online_retail
-  WHERE customerID IN(17850, 16029)
-  GROUP BY customer,
-           orders)
+    WHERE customerID IN(17850, 16029)
+    GROUP BY customer,
+             orders)
 SELECT  customer,
         ROUND(AVG(revenue), 2) as average_order_value
 FROM customer_orders
 GROUP BY customer;
 
 /*==================================================
- RESULT SET
+ Result
 ==================================================*/
 customer      average_order_value      
 17850         140.5
