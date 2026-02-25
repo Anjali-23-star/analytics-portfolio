@@ -1,6 +1,8 @@
--- According to our schema, each product is categorized into a category of furniture/electronics etc.
+--According to our schema, each product is categorized into a category of furniture/electronics etc.
 -- I started with a suspicion. What are the categories that are returned the most? I picked up furniture.
 
+/*
+=========================================================================================================================
 HYPOTHESIS: Products belonging to furniture category are returned most.
 APPROACH: 
   I asked a simple question: Is return rate for furniture higher than others?
@@ -15,8 +17,9 @@ APPROACH:
 Now, the delivered status is given in shipments table and returned status is in returns table. I simply joined and extracted
 the needed information. It is to be noted that while joining returns table, I came to realize that I have to join it based on
 both the product id and the order to which the product belongs.
+===============================================================================================================================*/
 
-QUERY:
+--QUERY:
 
 CREATE VIEW return_data AS
 		                  SELECT
@@ -40,9 +43,12 @@ CREATE VIEW return_data AS
 		                ON oi.product_id = r.product_id
                     AND oi.order_id = r.order_id;
 
+
+/*
+==========================================================================================================
 Finally, I checked out of the total delivered product of the respective category, how many were returned?
 Total returned/Total delivered for each category.
-
+==========================================================================================================*/
                      SELECT 
                            category,
                            SUM(CASE
@@ -57,13 +63,18 @@ Total returned/Total delivered for each category.
                      FROM return_data
                      GROUP BY category;
 
-RESULT SET:
--------------------------------------------------------------------
+--RESULT SET:
+/*
+===================================================================
 | category | total_delivered_orders | total_returned | return_rate |
 --------------------------------------------------------------------  
 Electronics	            3                	1	             33%
 Furniture	              2               	1	             50%
--------------------------------------------------------------------
+-------------------------------------------------------------------*/
 
+/*
+================================================================================
 INSIGHT:
-The results concluded the hypothesis. Out of the total furntiure shipped, 50% were returned. Meanwhile, Electronics return rate is just 33%.
+The results concluded the hypothesis. Out of the total furntiure shipped,
+50% were returned. Meanwhile, Electronics return rate is just 33%.
+===============================================================================*/
