@@ -1,1 +1,56 @@
+-- Step 1: Assign row numbers and total product count
 
+CREATE VIEW assign_rows AS
+SELECT 
+      oi.order_id,
+      p.product_id,
+      p.product_name,
+      p.price,
+      r.return_id,
+      ROW_NUMBER() OVER(ORDER BY price) AS row_rank,
+      COUNT(*) OVER() AS total_count
+FROM products p
+LEFT JOIN order_items oi 
+ON p.product_id = oi.product_id
+LEFT JOIN returns r 
+ON r.order_id = oi.order_id
+AND r.product_id = oi.product_id;
+
+
+-- Step 2: Calculate median price
+
+CREATE VIEW median_price AS
+SELECT 
+      ROUND(AVG(price), 2) AS median
+FROM assign_rows
+WHERE (total_count % 2 = 1 AND row_rank = (total_count + 1) / 2)
+OR (total_count % 2 = 0 AND row_rank IN (total_count / 2, total_count / 2 + 1));
+
+
+-- Step 3: Classify products by price band
+
+CREATE VIEW product_type AS
+SELECT
+      order_id,
+      product_name,
+      price,
+      return_id,
+      m.median,
+      CASE
+            WHEN price >= m.median THEN 'Premium'
+            ELSE 'Cheap'
+      END AS type
+FROM assign_rows
+CROSS JOIN median_price m;
+
+
+-- Step 4: Calculate return rates by price band
+
+SELECT  
+      (SUM(CASE WHEN type = 'Cheap' AND return_id IS NOT NULL THEN 1 END) /
+      NULLIF(SUM(CASE WHEN type = 'Cheap' THEN 1 END), 0) * 100) AS cheap_return_percent,
+
+      (SUM(CASE WHEN type = 'Premium' AND return_id IS NOT NULL THEN 1 END) /
+      NULLIF(SUM(CASE WHEN type = 'Premium' THEN 1 END), 0) * 100) AS premium_return_percent
+
+FROM product_type;
