@@ -3,3 +3,10 @@ Logistics is an important aspect of any business. Understanding the operational 
 This dataset provides an opportunity to explore real-world logistics questions and analyse operational patterns using data.
 
 ## Dataset Schema
+
+### customers
+
+==========================================================
+| customer_id(PK) | customer_name | region | signup_date |
+==========================================================
+
