@@ -5,8 +5,6 @@ This dataset provides an opportunity to explore real-world logistics questions a
 ## Dataset Schema
 
 ### customers
-
-==========================================================
 | customer_id(PK) | customer_name | region | signup_date |
-==========================================================
+
 
