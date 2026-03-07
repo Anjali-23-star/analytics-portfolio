@@ -3,7 +3,7 @@
 ## Business Question
 Do delivery delays influence product return behavior?
 
-Delivery performance plays a crucial role in customer satisfaction. Late deliveries may lead to frustration and increase the likelihood of customers returning their orders. This analysis explores whether delayed deliveries are associated with higher return rates.
+Delivery performance plays an important role in customer satisfaction. Late deliveries may result in dissatisfaction among customers and increase the likelihood of customers returning their orders. This analysis explores whether delayed deliveries are associated with higher return rates.
 
 ---
 
@@ -27,7 +27,7 @@ Steps followed:
 
 A view named **`order_status`** was created to consolidate the delivery status and return information.
 
-A **LEFT JOIN** was used when joining the returns table because the analysis operates at the **order grain**, and not every order necessarily has a return.
+A **LEFT JOIN** was used when joining the returns table because the analysis operates at the **order grain**, and every order may not be returned.
 
 ---
 
@@ -50,6 +50,6 @@ Return Rate = (Total Returned Orders / Total Orders) × 100
 
 ## Insight
 
-Late deliveries were significantly more likely to be returned in this dataset.
+Every late delivered ordered was returned in this dataset.
 
 This suggests that delivery delays may negatively impact customer satisfaction and increase the likelihood of product returns.
