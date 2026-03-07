@@ -22,5 +22,16 @@ CREATE VIEW return_data AS
                           AND oi.order_id = r.order_id;
 
 -- Calculate return rate by category
-
-
+SELECT 
+       category,
+       SUM(CASE
+       WHEN delivered = 'Yes' THEN 1
+       ELSE 0
+       END) AS total_delivered_orders,
+       SUM(CASE
+       WHEN returned = 'Yes' THEN 1
+       ELSE 0
+       END) AS total_returned,
+       CONCAT(ROUND(SUM(CASE WHEN returned = 'Yes' THEN 1 ELSE 0 END)/SUM(CASE WHEN delivered = 'Yes' THEN 1 ELSE 0 END)*100, 0), '%') AS return_rate
+FROM return_data
+GROUP BY category;
