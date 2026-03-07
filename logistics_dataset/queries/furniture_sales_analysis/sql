@@ -1,1 +1,26 @@
+-- Create view combining product, delivery and return information.
+CREATE VIEW return_data AS
+		                       SELECT
+                                  oi.order_id,
+            		                  p.product_name,
+            		                  p.category,
+                                  CASE 
+            			                WHEN s.delivery_status = 'Delivered' THEN 'Yes'
+                                  ELSE 'No'
+            		                  END AS delivered,
+                                  CASE 
+            			                WHEN r.return_date IS NOT NULL THEN 'Yes'
+                                  ELSE 'No'
+            		                  END AS returned
+                      		FROM order_items oi
+                      		INNER JOIN products p
+      		                ON oi.product_id = p.product_id
+                          LEFT JOIN shipments s 
+                          ON oi.order_id = s.order_id
+      		                LEFT JOIN returns r
+      		                ON oi.product_id = r.product_id
+                          AND oi.order_id = r.order_id;
+
+-- Calculate return rate by category
+
 
