@@ -1,5 +1,5 @@
-# analytics-portfolio
+#SQL Analytics Portfolio
 
-This repository contains small, focused anlaytics project where I explore how to ask better business questions using sql and data.
+This repository showcases SQL driven analytics projects focused on supply chain and logistics scenarios. The goal is to explore real world business problems and extract meaningful insights through structured data analysis.
 
-Each folder represents one portfolio project, with the question, approach, and findings documented alongside queries.
+Each project folder contains the problem statement, analytical approach, SQL queries and the resulting insights.
