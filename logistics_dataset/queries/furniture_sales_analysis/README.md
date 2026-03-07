@@ -18,3 +18,7 @@ Furniture products are returned more frequently than others.
 To test this hypothesis, the goal was to create a dataset with the following structure:
 
 | order_id | product_name | category | delivered | returned |
+
+Steps followed:
+
+1. Retrieved the **category and product information** from the `products` table.
