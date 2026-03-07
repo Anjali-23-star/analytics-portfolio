@@ -45,8 +45,8 @@ This was computed for each product category.
 ## Result
 | category | total_delivered_orders | total_returned | return_rate |
 --------------------------------------------------------------------
-Electronics           3                    1             33%
-Furniture             2                    1             50%
+|Electronics |          3           |       1        |    33%      |
+|Furniture   |          2           |       1        |    50%      |
 
 ---
 
