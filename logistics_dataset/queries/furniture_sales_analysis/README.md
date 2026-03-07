@@ -54,3 +54,9 @@ This was computed for each product category.
 
 Furniture products showed the highest return rate in this dataset, with **50% of delivered items being returned**, compared to **33% for electronics**.
 This may suggest potential issues such as product expectations, delivery handling or product quality.
+
+
+| category | total_delivered_orders | total_returned | return_rate |
+|----------|-----------------------|---------------|-------------|
+| Electronics | 3 | 1 | 33% |
+| Furniture | 2 | 1 | 50% |
