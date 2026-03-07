@@ -1,6 +1,6 @@
-# :Products Product Category Return Analysis
+# 📦 Product Category Return Analysis
 
-## Business Question
+## 🔍 Business Question
 Which product category has the highest return rate?
 
 Product returns can indicate issues with product quality, delivery handling, or customer expectations.  
@@ -8,12 +8,12 @@ This analysis investigates whether certain product categories experience higher 
 
 ---
 
-## Hypothesis
+## 🧠 Hypothesis
 Furniture products are returned more frequently than others.
 
 ---
 
-## Approach 
+## 📊 Approach 
 
 To test this hypothesis, the goal was to create a dataset with the following structure:
 
@@ -32,7 +32,7 @@ One important observation during the join was that the **returns table must be j
 
 --- 
 
-## Analysis
+## 📈 Analysis
 
 The return rate was calculated as:
 
@@ -42,7 +42,7 @@ This was computed for each product category.
 
 ---
 
-## Result
+## 📊 Result
 | category | total_delivered_orders | total_returned | return_rate |
 |----------|-----------------------|---------------|-------------|
 | Electronics | 3 | 1 | 33% |
@@ -50,7 +50,7 @@ This was computed for each product category.
 
 ---
 
-## Insight
+## 💡 Insight
 
 Furniture products showed the highest return rate in this dataset, with **50% of delivered items being returned**, compared to **33% for electronics**.
 This may suggest potential issues such as product expectations, delivery handling or product quality.
